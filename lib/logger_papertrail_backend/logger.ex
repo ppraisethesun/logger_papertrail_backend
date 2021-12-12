@@ -78,7 +78,7 @@ defmodule LoggerPapertrailBackend.Logger do
       |> Logger.Formatter.compile()
 
     level = Keyword.get(config, :level)
-    metadata = Keyword.get(config, :metadata, [])
+    metadata = Keyword.get(config, :metadata, []) |> configure_metadata()
     metadata_filter = Keyword.get(config, :metadata_filter)
 
     target_config = configure_papertrail_target(config)
@@ -116,6 +116,9 @@ defmodule LoggerPapertrailBackend.Logger do
       enabled: Keyword.get(colors, :enabled, IO.ANSI.enabled?())
     }
   end
+
+  defp configure_metadata(:all), do: :all
+  defp configure_metadata(metadata), do: Enum.reverse(metadata)
 
   defp log_event(level, msg, ts, md, %{colors: colors, system_name: system_name} = state) do
     application =
@@ -156,7 +159,7 @@ defmodule LoggerPapertrailBackend.Logger do
   defp color_event(data, _level, %{enabled: false}), do: data
 
   defp color_event(data, level, %{enabled: true} = colors) do
-    [IO.ANSI.format_fragment(Map.fetch!(colors, level), true), data | IO.ANSI.reset()]
+    [IO.ANSI.format_fragment(Map.fetch!(colors, level), true), data, IO.ANSI.reset()]
   end
 
   defp metadata_matches?(_md, nil), do: true
