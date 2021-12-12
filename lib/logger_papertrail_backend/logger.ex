@@ -146,6 +146,10 @@ defmodule LoggerPapertrailBackend.Logger do
     Logger.Formatter.format(format, level, msg, ts, take_metadata(md, keys))
   end
 
+  defp take_metadata(metadata, :all) do
+    metadata
+  end
+
   defp take_metadata(metadata, keys) do
     Enum.reduce(keys, [], fn key, acc ->
       case Keyword.fetch(metadata, key) do
