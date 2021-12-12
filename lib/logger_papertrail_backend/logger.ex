@@ -163,7 +163,7 @@ defmodule LoggerPapertrailBackend.Logger do
   defp color_event(data, _level, %{enabled: false}), do: data
 
   defp color_event(data, level, %{enabled: true} = colors) do
-    [IO.ANSI.format_fragment(Map.fetch!(colors, level), true), data, IO.ANSI.reset()]
+    [IO.ANSI.format_fragment(Map.fetch!(colors, level), true), data]
   end
 
   defp metadata_matches?(_md, nil), do: true
