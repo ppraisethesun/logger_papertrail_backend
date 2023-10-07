@@ -72,7 +72,7 @@ config :logger,
 * (Required) Follow "Add System" in your Papertrail dashboard to get `:host` values
 * (Optional) Set `:level` for this backend (overides global `:logger`-setting )
 * (Optional) Set specific `:system_name` in Papertrail, defaults to current application-name
-* (Optional) Set :format, defaults to `[$level] $levelpad$metadata $message`, see [Logger.Formatter](https://hexdocs.pm/logger/Logger.Formatter.html#content)
+* (Optional) Set :format, defaults to `[$level] $metadata $message`, see [Logger.Formatter](https://hexdocs.pm/logger/Logger.Formatter.html#content)
 * (Optional) Set `:metadata_filter` - metadata terms which must be present in order to log. See [LoggerFileBackend](https://github.com/onkel-dirtus/logger_file_backend#filtering-specific-metadata-terms) for examples.
 * Other supported options in config are `:colors`, `:metadata`. See :console-docs in [Logger](https://hexdocs.pm/logger/Logger.html#module-console-backend)
 

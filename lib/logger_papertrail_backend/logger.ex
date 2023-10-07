@@ -5,7 +5,7 @@ defmodule LoggerPapertrailBackend.Logger do
 
   # Most of this is shamelessy copied from :console-backend
 
-  @default_format "[$level] $levelpad$metadata $message"
+  @default_format "[$level] $metadata $message"
 
   def init(__MODULE__) do
     if Process.whereis(:user) do
@@ -112,6 +112,7 @@ defmodule LoggerPapertrailBackend.Logger do
       debug: Keyword.get(colors, :debug, :cyan),
       info: Keyword.get(colors, :info, :normal),
       warn: Keyword.get(colors, :warn, :yellow),
+      warning: Keyword.get(colors, :warning, :yellow),
       error: Keyword.get(colors, :error, :red),
       enabled: Keyword.get(colors, :enabled, IO.ANSI.enabled?())
     }
