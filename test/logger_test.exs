@@ -6,6 +6,7 @@ defmodule LoggerPapertrailBackend.LoggerTest do
   @port 29123
 
   setup do
+    Application.stop(:logger)
     :ok = Application.put_env(:logger, :backends, [LoggerPapertrailBackend.Logger])
 
     :ok =

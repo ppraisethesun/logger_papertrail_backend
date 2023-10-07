@@ -6,7 +6,7 @@ defmodule LoggerPapertrailBackend do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(LoggerPapertrailBackend.Sender, [])
+      LoggerPapertrailBackend.Sender
     ]
 
     opts = [strategy: :one_for_one, name: LoggerPapertrailBackend.Supervisor]
